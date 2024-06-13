@@ -110,12 +110,12 @@ const BarcodeScanner = ({
     deviceId,
     setVisible,
     onResult = (result) => {
-        console.table(result);
-        alert(result.getText());
-        setVisible(false);
+      console.table(result);
+      alert(result.getText());
+      setVisible(false);
     },
     onError = (err) => {
-        console.log(err);
+      console.log(err);
     },
   }: {
     deviceId: string;
@@ -123,7 +123,10 @@ const BarcodeScanner = ({
     onResult?: (result: Result) => void;
     onError?: (error: Error) => void;
   }) => {
-    const { ref } = useZxing({ deviceId, onResult, onError });
+    // Conditionally set the deviceId in the options for useZxing
+    const zxingOptions = deviceId ? { deviceId, onResult, onError } : { onResult, onError };
+    const { ref } = useZxing(zxingOptions);
+  
     return <video ref={ref} />;
   };
 // Path: src/app/admin/users/adduser/page.tsx

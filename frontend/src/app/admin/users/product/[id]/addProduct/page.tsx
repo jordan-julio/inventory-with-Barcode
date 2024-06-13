@@ -10,6 +10,7 @@ import { Content, Header } from "antd/es/layout/layout";
 import { BrowserMultiFormatReader, DecodeHintType, Result } from '@zxing/library';
 
 interface ZxingOptions {
+  deviceId?: string;
   hints?: Map<DecodeHintType, any>;
   constraints?: MediaStreamConstraints;
   timeBetweenDecodingAttempts?: number;
@@ -17,8 +18,11 @@ interface ZxingOptions {
   onError?: (error: Error) => void;
 }
 
-const DeviceSelector = ({ visible, setVisible }) => {
-    const [devices, setDevices] = useState([]);
+const DeviceSelector = ({ visible, setVisible } : {
+    visible: boolean;
+    setVisible: (visible: boolean) => void;
+}) => {
+    const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
     const [selectedDevice, setSelectedDevice] = useState('');
 
     useEffect(() => {
@@ -31,7 +35,7 @@ const DeviceSelector = ({ visible, setVisible }) => {
             }
         };
 
-        if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+        if (navigator.mediaDevices) {
             fetchDevices();
         }
     }, []);
@@ -65,7 +69,7 @@ const useZxing = ({
   timeBetweenDecodingAttempts = 300,
   onResult = () => {},
   onError = () => {},
-}: ZxingOptions & { deviceId?: string } = {}) => {
+}: ZxingOptions = {}) => {
     const [constraints, setConstraints] = useState<MediaStreamConstraints>({
         audio: false,
         video: deviceId ? { deviceId: { exact: deviceId } } : { facingMode: 'environment' },
@@ -113,6 +117,11 @@ const BarcodeScanner = ({
     onError = (err) => {
         console.log(err);
     },
+  }: {
+    deviceId: string;
+    setVisible: (visible: boolean) => void;
+    onResult?: (result: Result) => void;
+    onError?: (error: Error) => void;
   }) => {
     const { ref } = useZxing({ deviceId, onResult, onError });
     return <video ref={ref} />;

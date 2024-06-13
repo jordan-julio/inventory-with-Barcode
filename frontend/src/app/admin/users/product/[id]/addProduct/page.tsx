@@ -26,18 +26,23 @@ const DeviceSelector = ({ visible, setVisible } : {
     const [selectedDevice, setSelectedDevice] = useState('');
 
     useEffect(() => {
-        const fetchDevices = async () => {
+        const checkAndRequestCameraPermission = async () => {
             try {
+                // Attempt to get a video stream. This prompts the user for permission if not already granted.
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                // If we get here, permission was granted. We can now list devices.
                 const devices = await navigator.mediaDevices.enumerateDevices();
                 setDevices(devices.filter(device => device.kind === 'videoinput'));
+                // Make sure to stop the stream after getting permission to avoid keeping the camera on.
+                stream.getTracks().forEach(track => track.stop());
             } catch (error) {
-                console.error('Error fetching devices:', error);
+                // Handle errors or permission denial here.
+                console.error('Error requesting camera permission:', error);
+                alert('Camera access is required for this feature.');
             }
         };
-
-        if (navigator.mediaDevices) {
-            fetchDevices();
-        }
+    
+        checkAndRequestCameraPermission();
     }, []);
 
     const handleDeviceSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {

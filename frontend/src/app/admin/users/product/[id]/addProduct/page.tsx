@@ -102,7 +102,7 @@ const useZxing = ({
 };
 
 
-export const BarcodeScanner = ({
+const BarcodeScanner = ({
     deviceId,
     setVisible,
     onResult = (result) => {

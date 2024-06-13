@@ -28,7 +28,7 @@ export default function Register() {
       // hash password
       const salt = genSaltSync(10);
       const hash = hashSync(password, salt);
-      const response = await axios.post("http://localhost:3001/api/register", { email: email, username: username, password: hash });
+      const response = await axios.post(`${process.env.BACKEND_HOST}/api/register`, { email: email, username: username, password: hash });
       localStorage.setItem("token", response.data.token);
       // decrypt jwt get the base64 data and get token.type if 'admin' router.push to /admin else router.push to /member
       const token = localStorage.getItem('token');

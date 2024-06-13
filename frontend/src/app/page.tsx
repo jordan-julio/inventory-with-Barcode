@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import axios from "axios";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
@@ -11,10 +11,16 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState("");
+  useEffect(() => {
+    // test api route
+    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}`).then((response) => {
+      console.log(response.data);
+    });
+  }, []);
   const handleSubmit = async () => {
     try {
       // process.env.BACKEND_HOST
-      const response = await axios.post(`${process.env.BACKEND_HOST}/api/login`, { email, password });
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/api/login`, { email, password });
       localStorage.setItem("token", response.data.token);
       const token = localStorage.getItem('token');
       const base64Url = token?.split('.')[1];

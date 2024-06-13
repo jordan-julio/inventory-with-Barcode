@@ -28,7 +28,7 @@ export default function AddUser() {
         setId(location.split('/').pop() || '');
         const getOneUserData = async (id: string) => {
             try {
-                const response = await axios.get(`${process.env.BACKEND_HOST}/admins/api/getOneUser/${id}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/getOneUser/${id}`);
                 form.setFieldsValue({
                     username: response.data.data.username,
                     email: response.data.data.email,
@@ -46,7 +46,7 @@ export default function AddUser() {
             // hash password
             const salt = genSaltSync(10);
             const hash = hashSync(values.password, salt);
-            const response = await axios.put(`${process.env.BACKEND_HOST}/admins/api/editOneUser`, { id: id, username: values.username, password: hash });
+            const response = await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/editOneUser`, { id: id, username: values.username, password: hash });
             success();
           } catch (error) {
             console.error(error);

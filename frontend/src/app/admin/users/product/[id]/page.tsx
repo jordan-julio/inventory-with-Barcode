@@ -73,7 +73,7 @@ export default function Products() {
         setId(location.split('/').pop() || '');
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(`${process.env.BACKEND_HOST}/admins/api/getAllProducts`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/getAllProducts`);
                 setProducts(response.data.data);
             } catch (error) {
                 console.error(error);
@@ -81,7 +81,7 @@ export default function Products() {
         };
         const getOneUserData = async () => {
             try {
-                const response = await axios.get(`${process.env.BACKEND_HOST}/admins/api/getOneUser/${id}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/getOneUser/${id}`);
                 setOneUserData(response.data.data);
             } catch (error) {
                 console.error(error);

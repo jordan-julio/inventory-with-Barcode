@@ -24,7 +24,7 @@ export default function AddUser() {
             // hash password
             const salt = genSaltSync(10);
             const hash = hashSync(values.password, salt);
-            const response = await axios.post(`${process.env.BACKEND_HOST}/admins/api/register`, { email: values.email, username: values.username, password: hash });
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/register`, { email: values.email, username: values.username, password: hash });
             form.resetFields();
             success();
           } catch (error) {

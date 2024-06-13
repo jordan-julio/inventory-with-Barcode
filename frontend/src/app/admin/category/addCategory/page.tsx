@@ -22,7 +22,7 @@ export default function AddUser() {
     const handleSubmit = async (values: any) => {
         try {
             // hash password
-            const response = await axios.post(`${process.env.BACKEND_HOST}/admins/api/addCategory`, { categoryName: values.categoryName, description: values.description });
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/addCategory`, { categoryName: values.categoryName, description: values.description });
             form.resetFields();
             success();
           } catch (error) {

@@ -38,7 +38,7 @@ export default function AdminUsers() {
                     Edit
                 </Button>
                 <Button onClick={async () => {
-                    await axios.delete(`${process.env.BACKEND_HOST}/admins/api/deleteOneUser/${record.id}`)
+                    await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/deleteOneUser/${record.id}`)
                     router.refresh();
                 }}>
                     Delete User
@@ -52,7 +52,7 @@ export default function AdminUsers() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get(`${process.env.BACKEND_HOST}/admins/api/getAllUsers`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/getAllUsers`);
                 setUsers(response.data.data);
             } catch (error) {
                 console.error(error);

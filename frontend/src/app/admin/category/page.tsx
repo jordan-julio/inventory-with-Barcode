@@ -40,7 +40,7 @@ export default function Category() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get(`${process.env.BACKEND_HOST}/admins/api/getAllCategories`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/getAllCategories`);
                 setCategory(response.data.data);
                 setTotalQuantity(response.data.data.length);
             } catch (error) {

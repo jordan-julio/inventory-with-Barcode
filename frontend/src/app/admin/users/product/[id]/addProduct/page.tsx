@@ -147,7 +147,7 @@ export default function AddProduct() {
     useEffect(() => {
         const getAllCategories = async () => {
             try {
-                const response = await axios.get(`${process.env.BACKEND_HOST}/admins/api/getAllCategories`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/getAllCategories`);
                 setCategoriesDropdownData(response.data.data);
             } catch (error) {
                 console.error(error);
@@ -159,7 +159,7 @@ export default function AddProduct() {
         try {
             // hash password
             console.log(values);
-            const response = await axios.post(`${process.env.BACKEND_HOST}/admins/api/addProduct`, { 
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/addProduct`, { 
                 productName: values.productName, 
                 description: values.productDescription,
                 price: values.productPrice,

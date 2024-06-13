@@ -28,7 +28,7 @@ export default function AddUser() {
         setId(location.split('/').pop() || '');
         const getOneCategoryData = async (id: string) => {
             try {
-                const response = await axios.get(`${process.env.BACKEND_HOST}/admins/api/getOneCategory/${id}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/getOneCategory/${id}`);
                 form.setFieldsValue({
                     categoryName: response.data.data.categoryName,
                     description: response.data.data.description,
@@ -44,7 +44,7 @@ export default function AddUser() {
     const handleSubmit = async (values: any) => {
         try {
             // hash password
-            const response = await axios.put(`${process.env.BACKEND_HOST}/admins/api/editOneCategory`, { id: id, categoryName: values.categoryName, description: values.description});
+            const response = await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/admins/api/editOneCategory`, { id: id, categoryName: values.categoryName, description: values.description});
             success();
           } catch (error) {
             console.error(error);

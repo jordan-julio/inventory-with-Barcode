@@ -41,14 +41,14 @@ export default function Products() {
         title: 'Sold At',
         dataIndex: 'soldAt',
         key: 'soldAt',
-        render: (text, record) => (
+        render: (text: string, record: any) => (
             <span>{record.soldAt ? new Date(record.soldAt).toLocaleDateString() : 'N/A'}</span>
         ),
     },
     {
         title: 'Action',
         key: 'action',
-        render: (text, record) => (
+        render: (text: string, record: any) => (
             <Button onClick={() => {
                 router.push(`/admin/users/edituser/${record.id}`)
             }}>

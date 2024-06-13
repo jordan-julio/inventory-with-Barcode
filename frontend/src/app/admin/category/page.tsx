@@ -26,7 +26,7 @@ export default function Category() {
         {
             title: 'Action',
             key: 'action',
-            render: (text, record) => (
+            render: (text: string, record: any) => (
                 <Button onClick={() => {
                     router.push(`/admin/category/editCategory/${record.id}`)
                 }}>

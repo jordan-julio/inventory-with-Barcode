@@ -1,0 +1,10 @@
+const userModel = require("./userModel");
+const categoryModel = require("./categoryModel");
+const productOnEachUserModel = require("./productOnEachUserModel");
+const productModel = require("./productModel");
+const model = {};
+model.users = userModel;
+model.categories = categoryModel;
+model.productOnEachUsers = productOnEachUserModel;
+model.products = productModel;
+module.exports = model;

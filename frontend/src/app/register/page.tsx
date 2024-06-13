@@ -14,12 +14,19 @@ export default function Register() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const base64Url = token?.split('.')[1];
+    if (!token) return;
+    const base64Url = token.split('.')[1];
     const base64Decrypt = atob(base64Url || '');
-    if (JSON.parse(base64Decrypt).type === 'admin') {
-      router.push("/admin");
-    } else {
-      router.push("/member");
+    try {
+      const payload = JSON.parse(base64Decrypt);
+      if (payload.type === 'admin') {
+        router.push("/admin");
+      } else {
+        router.push("/member");
+      }
+    } catch (error) {
+      console.error("Error parsing token payload:", error);
+      // Handle the error (e.g., redirect to a login page or show an error message)
     }
   }, [router]);
   

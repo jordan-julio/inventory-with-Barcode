@@ -13,6 +13,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const handleSubmit = async () => {
     try {
+      // process.env.BACKEND_HOST
       const response = await axios.post(`${process.env.BACKEND_HOST}/api/login`, { email, password });
       localStorage.setItem("token", response.data.token);
       const token = localStorage.getItem('token');
